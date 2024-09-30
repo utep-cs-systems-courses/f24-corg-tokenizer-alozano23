@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "tokenizer.h"
 #include "history.h"
+#include "tester.h"
 
 /*
     The following is a simple testing script with a single example of input
@@ -96,7 +97,7 @@ static char *all_tests() {
     return 0;
 }
 
- int main(int argc, char **argv) {   
+ void run_tests(int argc, char **argv) {   
     char *result = all_tests();
 
     if (result != 0) 

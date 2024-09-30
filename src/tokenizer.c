@@ -1,0 +1,64 @@
+#include <string.h>
+
+#include <stdio.h>
+
+#include "tokenizer.h"
+
+#include "malloc.h"
+
+#include "history.h"
+
+#include "tester.h"
+
+int space_char(char c)
+
+{
+
+  return c == ' '|| c == '\t'|| c == '\0';
+
+}
+
+int non_space_char(char c)
+
+{
+
+  return !(space_char(c));
+
+}
+
+int count_words(char *str)
+{
+  return 0;
+}
+
+char *word_start(char *str)
+{
+  return str;
+}
+
+char *word_terminator(char *word)
+{
+  return word;
+}
+
+char *copy_str(char *inStr, short len)
+{
+  return inStr;
+}
+char** tokenize(char* str)
+{
+  int num_words = count_words(str);
+  char**  arr_ptr =(char**)malloc((num_words)*sizeof(char*));
+  return arr_ptr;
+}
+
+void print_tokens(char **tokens)
+{
+  return;
+}
+
+void free_tokens(char **tokens)
+{
+  return;
+}
+
