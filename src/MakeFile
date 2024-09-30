@@ -1,14 +1,18 @@
-             
-CFLAGS=-G -03
+
+OBJS = tokenizer.o history.o tester.o uimain.o
+
+CFLAGS=-g -O3
 
 all: uimain
 
 tokenizer.o:history.h tokenizer.h
 
-uimain: tokenizer.o history.o tester.o uimain.o
-	cc -o $@ $^ $(CFLAGS)
+uimain: $(OBJS)
+	cc -o uimain $(CFLAGS) $(OBJS)
 
-clean
+clean:
 	rm -f *.o uimain
 
+run: unimain
+	./uimain
 
