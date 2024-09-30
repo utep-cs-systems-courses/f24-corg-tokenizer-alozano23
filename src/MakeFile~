@@ -1,0 +1,12 @@
+
+CFLAGS=-G -03
+
+all: uimain
+
+tokenizer.o:history.h tokenizer.h
+
+uimain: tokenizer.o history.o tester.o uimain.o
+	cc -o $@ $^ $(CFLAGS)
+
+clean
+	rm -f *.o uimain
