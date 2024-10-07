@@ -61,7 +61,7 @@ char *word_terminator(char *word)
 
 char *copy_str(char* inStr, short len)
 {
-  char* word_token = (char*) malloc( sizeof(char) * sizeof(len+1) );
+  char* word_token = (char*) malloc( sizeof(char) *(len+1) );
   char* tok_start = word_token;
 
   for(int i = 0; i < len; i++){
@@ -82,21 +82,21 @@ char** tokenize(char* str)
     char* start = word_start(str);
     char* end = word_terminator(str);
     arr_ptr[i] = copy_str(start, end-start);
-    str = end++;
-			   
+    //str = end++;
+    str = end;			   
   }
   return arr_ptr;
 }
 
 void print_tokens(char **tokens)
 {
-  char* start = *tokens;
-  while(*tokens){
-    printf("%s ", *tokens);
-    *tokens++;
+  char** start =  tokens;
+  while(*start){
+    printf("%s ", *start);
+    *start++;
     
   }
-  *tokens = start;
+  tokens = start;
   free(start);
   return;
 }
