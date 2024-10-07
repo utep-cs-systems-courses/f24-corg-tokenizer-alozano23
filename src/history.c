@@ -8,7 +8,7 @@
 
 #include "history.h"
 
-#include "tester.h"
+//#include "tester.h"
 
 /* Initialize the linked list to keep the history. */
 
@@ -43,7 +43,7 @@ void free_history(List* list){
 }
 
 char *get_history(List* list, int id){
-  char placehldr = 'a';
-  char* ptr = &placehldr;
+  char placeHolder = 'a';
+  char* ptr = &placeHolder;
   return ptr;
 }
