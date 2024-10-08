@@ -80,36 +80,41 @@ char** tokenize(char* str)
   char**  arr_ptr =(char**)malloc((num_words)*sizeof(char*));
   for(int i = 0; i < num_words; i++){
     char* start = word_start(str);
-    char* end = word_terminator(str);
+    char* end = word_terminator(start);
     arr_ptr[i] = copy_str(start, end-start);
     //str = end++;
-    str = end;			   
+    str = end;
+    //if(str = '\0'){ break;}
   }
+  //arr_ptr[num_words] = NULL;
   return arr_ptr;
 }
 
 void print_tokens(char **tokens)
 {
   char** start =  tokens;
+  int count = 0;
   while(*start){
-    printf("%s ", *start);
-    *start++;
+    count++;
+    printf("%d %s \n", count, *start);
+    start++;
     
   }
   tokens = start;
-  free(start);
+  //free(start);
   return;
 }
 
 void free_tokens(char **tokens)
 {
-  if(tokens == NULL){return;}
+  if(*tokens == NULL){return;}
   char** ptr = tokens;
   while(*ptr){
     free(*ptr);
     ptr++;
   }
   free(tokens);
+  //tokens = NULL;
   return;
 }
 
