@@ -46,8 +46,8 @@ int count_words(char *str)
 char *word_start(char *str)
 {
   if(non_space_char(*str)){return str;}
-  if(space_char(*str) && *str =='\0'){
-    return '\0';
+  if(space_char(*str) =='\0'){
+    return NULL;
   }
   
   return word_start(str+1);
@@ -55,7 +55,7 @@ char *word_start(char *str)
 
 char *word_terminator(char *word)
 {
-  if(space_char(*word) ){ return word;}
+  if(space_char(*word) && *word != '\0'){ return word;}
   return word_terminator(word+1);
 }
 
@@ -72,6 +72,7 @@ char *copy_str(char* inStr, short len)
     inStr++;
   }
   *word_token = '\0';
+  //free(word_token);
   return tok_start;
 }
 char** tokenize(char* str)
@@ -83,10 +84,10 @@ char** tokenize(char* str)
     char* end = word_terminator(start);
     arr_ptr[i] = copy_str(start, end-start);
     //str = end++;
-    str = end;
+    str = end+1;
     //if(str = '\0'){ break;}
   }
-  //arr_ptr[num_words] = NULL;
+  arr_ptr[num_words] = NULL;
   return arr_ptr;
 }
 
@@ -100,7 +101,7 @@ void print_tokens(char **tokens)
     start++;
     
   }
-  tokens = start;
+  //tokens = start;
   //free(start);
   return;
 }
