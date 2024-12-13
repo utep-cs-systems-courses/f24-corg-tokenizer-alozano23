@@ -9,8 +9,10 @@ int main(){
   printf("type something below\n");
   printf("> ");
   char in_len [256];
-  fgets(in_len, sizeof(in_len), stdin); 
-  add_history(list, in_len);  
+  fgets(in_len, sizeof(in_len), stdin);
+  in_len[strcspn(in_len, "\n")] = '\0';
+  char* string = strdup(in_len);
+  add_history(list, string);  
   char** token = tokenize(in_len);
     
   print_tokens(token);
@@ -20,11 +22,12 @@ int main(){
  print:
   printf("Do you want to print the history?\n");
   fgets(in_len, sizeof(in_len), stdin);
-  if( in_len[0] =='y' | in_len[0] =='Y'){
+  in_len[strcspn(in_len, "\n")] = '\0'; 
+  if( in_len[0] =='y' || in_len[0] =='Y'){
     print_history(list);
     goto quit;
   }
-  else if(in_len[0] =='N'| in_len[0] == 'n'){
+  else if(in_len[0] =='N'|| in_len[0] == 'n'){
     goto quit;
   }else{
     printf("misinput. Try Again!\n");
@@ -33,7 +36,8 @@ int main(){
  quit:
   printf("would you like to quit?\n");
   fgets(in_len, sizeof(in_len), stdin);
-  if(in_len[0] == 'y' | in_len[0] =='Y' ){
+  in_len[strcspn(in_len, "\n")] = '\0'; 
+  if(in_len[0] == 'y' || in_len[0] =='Y' ){
     free_history(list);
     goto end;
   }

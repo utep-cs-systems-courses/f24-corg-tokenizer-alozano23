@@ -13,7 +13,7 @@
 /* Initialize the linked list to keep the history. */
 
 List* init_history(){
-  struct s_List* history = (struct s_List*)malloc(sizeof(struct s_List*));
+  struct s_List* history = (struct s_List*)malloc(sizeof(struct s_List));
 
   if(history == NULL){
     printf("history not initialized by init_history() ");
@@ -32,20 +32,34 @@ void add_history(List* list, char* string){
     printf("No viable string found!");
     return;
   }
-  struct s_Item* histEntry = (struct s_Item*)malloc(sizeof(struct s_Item*));
-
+  struct s_Item* histEntry = (struct s_Item*)malloc(sizeof(struct s_Item));
+  int len = 0;
+  while(string[len] != '\0'){
+    len++;
+  }
+  histEntry->str = malloc(len+1);
+  if(histEntry->str == NULL){
+    printf("hey, string did not work there");
+    free(histEntry);
+    return;
+  }
+  histEntry->str = string;
+  histEntry->next = NULL;
   if(list->root == NULL){
     list->root = histEntry;
-    list->root->str = string;
-    list->root->next = NULL;
+    histEntry->id = 1;
+    //list->root->str = string;
+    //list->root->next = NULL;
     return;
   }
   struct s_Item* temp = list->root;
   while(temp->next != NULL){
     temp = temp->next;
   }
+  histEntry->id = temp->id+1;
   temp->next = histEntry;
-  temp->next->str = string;
+  
+  //temp->next->str = string;
   return;
 }
 
@@ -67,6 +81,7 @@ void free_history(List* list){
   struct s_Item* temp = list->root;
 
   while(temp != NULL){
+    free(temp->str);
     free(temp);
     temp = temp->next;
   }
@@ -75,7 +90,23 @@ void free_history(List* list){
 }
 
 char *get_history(List* list, int id){
-  char placeHolder = 'a';
-  char* ptr = &placeHolder;
-  return ptr;
+  if (list == NULL) return NULL;
+
+  struct s_Item* temp = list->root;
+
+  while (temp != NULL) {
+
+    if (temp->id == id) {
+
+      return temp->str;
+
+    }
+
+    temp = temp->next;
+
+  }
+
+  return NULL;
+
+  
 }
